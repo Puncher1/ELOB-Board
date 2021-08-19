@@ -32,7 +32,7 @@ int main(void)
 	while (1) 
     {
 		if (buttonState){
-			if (!currentButtonState){					
+			if (!currentButtonState){
 				currentButtonState = 1;
 				if (ledCount >= 0){
 					PORTA |=(1<<ledCount);			// sets next LED to 1 
@@ -42,8 +42,9 @@ int main(void)
 					PORTA = 0x00;					// sets all LEDs to 0 after last LED
 					ledCount = 7;
 				}
+				_delay_ms(100);							// for debouncing; bad way to wait though (just for test porpuses)
 			}
-			_delay_ms(100);							// for debouncing; bad way to wait though (just for test porpuses)
+			
 			
 		}
 		else {
