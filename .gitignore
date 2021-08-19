@@ -1,8 +1,0 @@
-# Ignore everything
-Tasks/*
-!Tasks/LEDUpcounting
-Tasks/LEDUpcounting/*
-Documents
-
-# Exceptions
-!main.c
