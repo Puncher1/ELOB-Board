@@ -13,7 +13,7 @@
 #define F_CPU 8000000		// CPU operating frequency: 8MHz
 #include <util/delay.h>
 
-#define buttonState			(PINJ & (1<<7))
+#define buttonState		(PINJ & (1<<7))
 
 int main(void)
 {
