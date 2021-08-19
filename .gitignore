@@ -1,0 +1,7 @@
+# Ignore everything
+ELOB Board ATmega2560/ELOB Board ATmega2560/*
+ELOB Board ATmega2560/.vs
+ELOB Board ATmega2560/*.atsln
+
+# Exceptions
+!ELOB Board ATmega2560/ELOB Board ATmega2560/main.c
