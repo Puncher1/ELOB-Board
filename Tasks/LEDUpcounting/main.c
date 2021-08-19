@@ -43,7 +43,7 @@ int main(void)
 					ledCount = 7;
 				}
 			}
-			_delay_ms(200);							// for debouncing; bad way to wait though (just for test porpuses)
+			_delay_ms(100);							// for debouncing; bad way to wait though (just for test porpuses)
 			
 		}
 		else {
