@@ -42,7 +42,7 @@ int main(void)
 					PORTA = 0x00;					// sets all LEDs to 0 after last LED
 					ledCount = 7;
 				}
-				_delay_ms(100);							// for debouncing; bad way to wait though (just for test porpuses)
+				_delay_ms(10);							// for debouncing; bad way to wait though (just for test porpuses)
 			}
 			
 			
