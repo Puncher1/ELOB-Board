@@ -1,7 +1,7 @@
 /*******************************************************************************
 Firma        : GIBZ
-Autor        : Vorname Name
-Projekt      : Vorlagenprojekt
+Autor        : 
+Projekt      : Tasks
 Version      : 1.0
 Dateiname    : main.c
 Erstelldatum : 07.10.2020
@@ -16,12 +16,12 @@ Data Stack size   : 16 Byte
 
 ********************************************************************************
 Datum             Vers.    Kommentar / Änderungsgrund
-06.04.2018        1.0      Erstellung
+30.08.2021        1.0      Erstellung
 
 *******************************************************************************/
 
 /*------------------ Definitionen für die Delayfunktion-----------------------*/
-#define F_CPU 16000000UL
+#define F_CPU 8000000
 /* CPU-Clock muss vor der Einbindung von delay.h definiert werden, da dieser
 sonst bereits definiert wurde und darum nicht übernommen würde             */
 
@@ -61,17 +61,22 @@ int main(void)
 	elob_init();
 	
 	/* Lokale Variablen */
-	uint16_t num = 1234;
+	uint16_t num = 9381;
 	
 	while(1)
 	{
+		uint16_t num_copy = num;
+		uint16_t num_len = numLen(num_copy);
 		
-		for (int i = 0; i < sizeof(num); i++){
-			double num_thousands = num % 1000; // 1.234
+		while(num_len){
+			uint16_t digit = num_copy%10;
+			num_copy /= 10;
 			
-			writeUART(current_ascii);
+			writeUART(digit);
 			WaitMilliseconds(1000);
+			num_len--;
 		}
+		
 	}
 }
 
@@ -97,4 +102,12 @@ void PosFlankenerkennung(void)
 	TastenAktuell = TASTER;
 	FlankeTastePos = TastenAktuell & ~TastenVorher;
 	TastenVorher = TastenAktuell;
+}
+
+int numLen(uint16_t n){
+	if (n < 10) return 1;
+	if (n < 100) return 2;
+	if (n < 1000) return 3;
+	if (n < 10000) return 4;
+	if (n < 100000) return 5;
 }
