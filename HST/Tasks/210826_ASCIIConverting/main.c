@@ -60,10 +60,18 @@ int main(void)
 	// ELOB initialisieren (I/O und UART)
 	elob_init();
 	
+	/* Lokale Variablen */
+	uint16_t num = 1234;
+	
 	while(1)
 	{
-		writeUART(1);
-		WaitMilliseconds(1000);
+		
+		for (int i = 0; i < sizeof(num); i++){
+			double num_thousands = num % 1000; // 1.234
+			
+			writeUART(current_ascii);
+			WaitMilliseconds(1000);
+		}
 	}
 }
 
