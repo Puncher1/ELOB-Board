@@ -52,6 +52,10 @@ char FlankeTastePos;
 void WaitMilliseconds(int MilliSeconds);
 void PosFlankenerkennung(void);
 void writeUART(uint8_t zeichen);
+void dez_to_ascii(uint16_t num);
+
+uint16_t digit;
+unsigned char writeState = 1;
 
 /*----------------------------- Hauptprogramm --------------------------------*/
 
@@ -61,26 +65,63 @@ int main(void)
 	elob_init();
 	
 	/* Lokale Variablen */
-	uint16_t num = 9381;
+	uint16_t num = 942;
 	
 	while(1)
 	{
-		uint16_t num_copy = num;
-		uint16_t num_len = numLen(num_copy);
-		
-		while(num_len){
-			uint16_t digit = num_copy%10;
-			num_copy /= 10;
-			
-			writeUART(digit);
-			WaitMilliseconds(1000);
-			num_len--;
-		}
-		
+			dez_to_ascii(num);
+			if (writeState){
+				writeUART(digit + 48);
+				WaitMilliseconds(1000);
+			}
+
 	}
 }
 
 /*------------------------------- Funktionen ---------------------------------*/
+void dez_to_ascii(uint16_t num){
+	
+	static uint16_t num_copy;
+	static unsigned char digitPoint;
+	
+	if (digitPoint){
+		writeState = 1;
+		switch (digitPoint){
+			case 5:
+			digit = num_copy/10000;
+			num_copy %= 10000;
+			break;
+			
+			case 4:
+			digit = num_copy/1000;
+			num_copy %= 1000;
+			break;
+			
+			case 3:
+			digit = num_copy/100;
+			num_copy %= 100;
+			break;
+			
+			case 2:
+			digit = num_copy/10;
+			num_copy %= 10;
+			break;
+			
+			case 1:
+			digit = num_copy;
+			break;
+			
+		}
+		digitPoint--;
+	}
+	else{
+		num_copy = num;
+		digitPoint = numLen(num_copy);
+		writeState = 0;
+	}
+	
+}
+
 void writeUART(uint8_t zeichen)
 {
 	while ((UCSR1A & (1<<UDRE1)) == 0);	// warten bis Senderegister leer ist
