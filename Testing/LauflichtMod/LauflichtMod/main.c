@@ -2,7 +2,7 @@
  * LauflichtVariabel.c
  *
  * Created: 23.08.2021
- * Author : Schalla6
+ * Author : Puncher1
  *
  * Description:
  * Bei Programmstart soll die LED ganz rechts leuchten. 
