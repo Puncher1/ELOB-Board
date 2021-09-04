@@ -1,10 +1,10 @@
 /*
  * Mit Start-/Stoppknopf kann Stoppuhr gestartet/gestoppt werden. Zeit wird auf 7-Segment-Anzeige angezeigt (bis 99s)
  *
- * Author: Andrin Schaller
+ * Author: Puncher1
  * ********************************
  * Date			Vers.	Name				Comment / Change
- * 30.08.2021	1.0		Andrin Schaller		Creation
+ * 30.08.2021	1.0		Puncher1			Creation
  */
 
 
