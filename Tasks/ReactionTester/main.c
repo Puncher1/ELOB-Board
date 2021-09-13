@@ -1,10 +1,10 @@
 /*
- * Mit Start-/Stoppknopf kann Stoppuhr gestartet/gestoppt werden. Zeit wird auf 7-Segment-Anzeige angezeigt (bis 99s)
+ * Reaction tester with a 7-segment-display
  *
  * Author: Puncher1
  * ********************************
  * Date			Vers.	Name				Comment / Change
- * 30.08.2021	1.0		Puncher1			Creation
+ * 04.09.2021	1.0		Puncher1			Creation
  */
 
 
@@ -15,10 +15,6 @@
 #include <util/delay.h>
 
 // *** DEFINES ***
-
-// ** Inputs **
-#define tstStartStop			(gpio_tst.pos & (1<<0))
-#define tstReset				(gpio_tst.pos & (1<<1))
 
 // ** Outputs **
 #define segmentA_on				(PORTH |= (1<<0))
@@ -57,10 +53,9 @@
 #define segmentDStatement		(currentDigit == 0 || currentDigit == 2 || currentDigit == 3 || currentDigit == 5 || currentDigit == 6 || currentDigit == 8 || currentDigit == 9)
 #define segmentEStatement		(currentDigit == 0 || currentDigit == 2 || currentDigit == 6 || currentDigit == 8)
 #define segmentFStatement		(currentDigit == 0 || currentDigit == 4 || currentDigit == 5 || currentDigit == 6 || currentDigit == 8 || currentDigit == 9)
-#define segmentGStatement		(currentDigit == 2 || currentDigit == 3 || currentDigit == 4 || currentDigit == 5 || currentDigit == 6 || currentDigit == 8 || currentDigit == 9)
+#define segmentGStatement		(currentDigit == 2 || currentDigit == 3 || currentDigit == 4 || currentDigit == 5 || currentDigit == 6 || currentDigit == 8 || currentDigit == 9 || currentDigit == '-')
 
-
-// *** STRUCTURES ***
+#define speed		150
 
 // * GPIO *
 struct gpio{
@@ -72,10 +67,12 @@ struct gpio{
 
 
 // *** GLOBAL ***
+
+// ** Function Prototypes **
 void edgeDetection(struct gpio*);
-void SegmentDisplay(unsigned int, unsigned char, unsigned char);
+void SegmentDisplay(unsigned int, unsigned char, unsigned char, unsigned char);
 unsigned int Multiplexer(unsigned int, unsigned char);
-void SegmentControl(unsigned int, unsigned char, unsigned char);
+void SegmentControl(unsigned int, unsigned char, unsigned char, unsigned char);
 
 
 /*
@@ -86,83 +83,14 @@ int main(void){
 	// *** INITIALIZATION ***
 	
 	// ** I/O **
-	DDRJ = 0x00;			// 1= Output, 0= Input
-	DDRG = 0xFF;			
+	DDRG = 0xFF;
 	DDRH = 0xFF;
 	
-	multiplexer_on;
-	
 	// ** Local Variables **
-	struct gpio gpio_tst;
-	gpio_tst.port = &PINJ;
-	
-	unsigned char programState = 0;				// 1= started
-	unsigned char runState = 0;					// 1= counts time, 0= doesn't count time
-	unsigned char edgeDetectionState = 0;
-	
-	unsigned char tClock_pv = 0;
-	unsigned char tClock_cyc = 6;
-	
-	unsigned int tWatchDisplay_pv = 0000;
-	unsigned int tWatchDisplay_cyc = 9999;
-	
-	unsigned int tWatchDelay_pv = 0;
-	unsigned int tWatchDelay_cyc = 10;
+	multiplexer_on;
 	
 	// *** PROGRAM-LOOP ***
 	while (1){
-		
-			
-		if (tstStartStop && edgeDetectionState){
-
-			if (runState){
-				runState = 0;
-			}
-			else{
-				runState = 1;
-				programState = 1;
-			}
-
-		}
-		
-		if (tstReset && edgeDetectionState){
-			programState = 0;
-			runState = 0;
-		}
-		
-		if (programState){
-			SegmentDisplay(tWatchDisplay_pv, 1, 0);
-			if (runState){
-				if (tWatchDisplay_pv >= tWatchDisplay_cyc){
-					runState = 0;
-				}
-				else if (tWatchDelay_pv >= tWatchDelay_cyc){
-					tWatchDisplay_pv++;
-					tWatchDelay_pv = 0;
-				}
-				else{
-					tWatchDelay_pv++;
-				}
-			}	
-		}
-		else{
-			tWatchDisplay_pv = 0;
-			tWatchDelay_pv = 0;
-			SegmentDisplay(0000, 1, 0);
-		}
-		
-		/* Edge detection */
-		if (tClock_pv >= tClock_cyc){
-			edgeDetection(&gpio_tst);
-			tClock_pv = 0;
-			edgeDetectionState = 1;
-		}
-		else{
-			edgeDetectionState = 0;
-			tClock_pv++;
-		}
-		
-		_delay_ms(1.667);					// _delay_ms is inaccurate --> on 99s it's to inaccurate to use 1ms at 10 cycles
 	}
 }
 
@@ -184,19 +112,18 @@ void edgeDetection(struct gpio* myGPIO){
 	myGPIO->gpio_old = gpio_port;	
 }
 
-
 /*
  * @brief: Displays specific number to 7 segment display
  * @param num: The specific number which gets converted
  * @param isColon: Whenever the colon should be set or not
  * @param isApastrophe: Whenever the apastrophe should be set or not
  */
-void SegmentDisplay(unsigned int num, unsigned char isColon, unsigned char isApastrophe){
+void SegmentDisplay(unsigned int num, unsigned char isLine, unsigned char isColon, unsigned char isApastrophe){
 	
 	static unsigned char digitPoint = 0;		// 0= first digit, 3= last digit
 	
 	unsigned int currentDigit = Multiplexer(num, digitPoint);
-	SegmentControl(currentDigit, isColon, isApastrophe);
+	SegmentControl(currentDigit, isLine, isColon, isApastrophe);
 	
 	digitPoint++;
 	
@@ -259,18 +186,23 @@ unsigned int Multiplexer(unsigned int num, unsigned char digitPoint){
  * @param isColon: Whenever the colon should be set or not
  * @param isApastrophe: Whenever the apastrophe should be set or not
  */
-void SegmentControl(unsigned int currentDigit, unsigned char isColon, unsigned char isApastrophe){
+void SegmentControl(unsigned int currentDigit, unsigned char isLine, unsigned char isColon, unsigned char isApastrophe){
 	segmentDP_off;
 	
-	segmentAStatement ? segmentA_on : segmentA_off;
-	segmentBStatement ? segmentB_on : segmentB_off;
-	segmentCStatement ? segmentC_on : segmentC_off;
-	segmentDStatement ? segmentD_on : segmentD_off;
-	segmentEStatement ? segmentE_on : segmentE_off;
-	segmentFStatement ? segmentF_on : segmentF_off;
-	segmentGStatement ? segmentG_on : segmentG_off;
-	
-	isColon ? segmentColon_on : segmentColon_off;
-	isApastrophe ? segmentApastrophe_on : segmentApastrophe_off;
-	
+	if (isLine){
+		segmentG_on;
+	}
+	else{
+		segmentAStatement ? segmentA_on : segmentA_off;
+		segmentBStatement ? segmentB_on : segmentB_off;
+		segmentCStatement ? segmentC_on : segmentC_off;
+		segmentDStatement ? segmentD_on : segmentD_off;
+		segmentEStatement ? segmentE_on : segmentE_off;
+		segmentFStatement ? segmentF_on : segmentF_off;
+		segmentGStatement ? segmentG_on : segmentG_off;
+		
+		isColon ? segmentColon_on : segmentColon_off;
+		isApastrophe ? segmentApastrophe_on : segmentApastrophe_off;
+	}
+
 }

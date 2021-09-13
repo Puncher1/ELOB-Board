@@ -7,6 +7,8 @@ Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "LEDUpcounting", "LEDUpcount
 EndProject
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Stopwatch", "Stopwatch\Stopwatch.cproj", "{CD398D87-73C7-4672-A060-AAEBC28DC92A}"
 EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "ReactionTester", "ReactionTester\ReactionTester.cproj", "{06414679-F971-4376-AC19-D525A71848ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -21,6 +23,10 @@ Global
 		{CD398D87-73C7-4672-A060-AAEBC28DC92A}.Debug|AVR.Build.0 = Debug|AVR
 		{CD398D87-73C7-4672-A060-AAEBC28DC92A}.Release|AVR.ActiveCfg = Release|AVR
 		{CD398D87-73C7-4672-A060-AAEBC28DC92A}.Release|AVR.Build.0 = Release|AVR
+		{06414679-F971-4376-AC19-D525A71848ED}.Debug|AVR.ActiveCfg = Debug|AVR
+		{06414679-F971-4376-AC19-D525A71848ED}.Debug|AVR.Build.0 = Debug|AVR
+		{06414679-F971-4376-AC19-D525A71848ED}.Release|AVR.ActiveCfg = Release|AVR
+		{06414679-F971-4376-AC19-D525A71848ED}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
