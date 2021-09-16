@@ -53,9 +53,12 @@ void WaitMilliseconds(int MilliSeconds);
 void PosFlankenerkennung(void);
 void writeUART(uint8_t zeichen);
 void dez_to_ascii(uint16_t num);
+char array_to_UART(char* array);
 
 uint16_t digit;
 unsigned char writeState = 1;
+
+char string[100] = "Hello World";
 
 /*----------------------------- Hauptprogramm --------------------------------*/
 
@@ -69,9 +72,9 @@ int main(void)
 	
 	while(1)
 	{
-			dez_to_ascii(num);
+			char currentDigit = array_to_UART(&string);
 			if (writeState){
-				writeUART(digit + 48);
+				writeUART(currentDigit);
 				WaitMilliseconds(1000);
 			}
 
@@ -119,6 +122,21 @@ void dez_to_ascii(uint16_t num){
 		digitPoint = numLen(num_copy);
 		writeState = 0;
 	}
+	
+}
+
+char array_to_UART(char* array){
+	
+	static unsigned char digitPosition = 0;
+	
+	char currentDigit = array[digitPosition];
+	digitPosition++;
+	
+	if (array[digitPosition] == 0){
+		digitPosition = 0;
+	}
+	
+	return currentDigit;
 	
 }
 
