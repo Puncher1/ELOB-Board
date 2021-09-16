@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.C</ToolchainName>
-    <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
+    <ProjectGuid>{81dad7bc-5c56-480c-98f0-bd45d37410bf}</ProjectGuid>
     <avrdevice>ATmega2560</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>210913_ArrayNameUART</AssemblyName>
-    <Name>210913_ArrayNameUART</Name>
-    <RootNamespace>210913_ArrayNameUART</RootNamespace>
+    <AssemblyName>210916_Ringbuffer</AssemblyName>
+    <Name>210916_Ringbuffer</Name>
+    <RootNamespace>210916_Ringbuffer</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -122,7 +122,16 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="elob_init.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ringBuffer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ringBuffer.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
