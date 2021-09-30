@@ -43,5 +43,4 @@ Datum             Vers.    Kommentar / Änderungsgrund
 // function prototypes
 void elob_init(void);
 
-
 #endif /* ELOB_INIT_H_ */

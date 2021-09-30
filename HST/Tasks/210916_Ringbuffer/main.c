@@ -27,7 +27,7 @@ sonst bereits definiert wurde und darum nicht übernommen würde             */
 
 /*------------------------------- Einbindungen -------------------------------*/
 #include <avr/io.h>                 // Enthält I/O-Definitionen
-#include <avr/delay.h>              // Enthält _delay_ms() und _delay_us()
+#include <util/delay.h>              // Enthält _delay_ms() und _delay_us()
 #include "elob_init.h"
 #include "ringBuffer.h"
 
@@ -65,10 +65,18 @@ int main(void)
 {
 	// ELOB initialisieren (I/O und UART)
 	elob_init();
-
+	
 	/* Lokale Variablen */
 	setRingBuffer("A");
 	setRingBuffer("S");
+	setRingBuffer("S");
+	setRingBuffer("S");
+	setRingBuffer("S");
+	setRingBuffer("S");
+	setRingBuffer("S");
+	setRingBuffer("S");
+	setRingBuffer("S");
+	
 	
 	// *** PROGRAM-LOOP ***
 	while (1){

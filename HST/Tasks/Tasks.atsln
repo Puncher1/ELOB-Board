@@ -11,6 +11,8 @@ Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "210913_ArrayToUART", "Array
 EndProject
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "210916_Ringbuffer", "210916_Ringbuffer\210916_Ringbuffer.cproj", "{81DAD7BC-5C56-480C-98F0-BD45D37410BF}"
 EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "210923_Structs", "210923_Structs\210923_Structs.cproj", "{CC809AD3-9C68-460F-A245-A09786A78733}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -33,6 +35,10 @@ Global
 		{81DAD7BC-5C56-480C-98F0-BD45D37410BF}.Debug|AVR.Build.0 = Debug|AVR
 		{81DAD7BC-5C56-480C-98F0-BD45D37410BF}.Release|AVR.ActiveCfg = Release|AVR
 		{81DAD7BC-5C56-480C-98F0-BD45D37410BF}.Release|AVR.Build.0 = Release|AVR
+		{CC809AD3-9C68-460F-A245-A09786A78733}.Debug|AVR.ActiveCfg = Debug|AVR
+		{CC809AD3-9C68-460F-A245-A09786A78733}.Debug|AVR.Build.0 = Debug|AVR
+		{CC809AD3-9C68-460F-A245-A09786A78733}.Release|AVR.ActiveCfg = Release|AVR
+		{CC809AD3-9C68-460F-A245-A09786A78733}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
