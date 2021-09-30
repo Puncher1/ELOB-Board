@@ -13,6 +13,8 @@ Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "210916_Ringbuffer", "210916
 EndProject
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "210923_Structs", "210923_Structs\210923_Structs.cproj", "{CC809AD3-9C68-460F-A245-A09786A78733}"
 EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "readUART", "readUART\readUART.cproj", "{E92EAC1A-33E3-4D76-9AE7-3534938A96F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -39,6 +41,10 @@ Global
 		{CC809AD3-9C68-460F-A245-A09786A78733}.Debug|AVR.Build.0 = Debug|AVR
 		{CC809AD3-9C68-460F-A245-A09786A78733}.Release|AVR.ActiveCfg = Release|AVR
 		{CC809AD3-9C68-460F-A245-A09786A78733}.Release|AVR.Build.0 = Release|AVR
+		{E92EAC1A-33E3-4D76-9AE7-3534938A96F5}.Debug|AVR.ActiveCfg = Debug|AVR
+		{E92EAC1A-33E3-4D76-9AE7-3534938A96F5}.Debug|AVR.Build.0 = Debug|AVR
+		{E92EAC1A-33E3-4D76-9AE7-3534938A96F5}.Release|AVR.ActiveCfg = Release|AVR
+		{E92EAC1A-33E3-4D76-9AE7-3534938A96F5}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
