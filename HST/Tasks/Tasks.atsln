@@ -17,6 +17,8 @@ Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "readUART", "readUART\readUA
 EndProject
 Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "211216_Pruefungsverbesserung_UARTRechner", "211216_Pruefungsverbesserung_UARTRechner\211216_Pruefungsverbesserung_UARTRechner.cproj", "{E9701EA5-305B-45A5-A125-2EF32F59C62D}"
 EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "Pruefziffer", "Pruefziffer\Pruefziffer.cproj", "{FBAA591F-2E15-4F3D-8E09-88105869F5A3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -51,6 +53,10 @@ Global
 		{E9701EA5-305B-45A5-A125-2EF32F59C62D}.Debug|AVR.Build.0 = Debug|AVR
 		{E9701EA5-305B-45A5-A125-2EF32F59C62D}.Release|AVR.ActiveCfg = Release|AVR
 		{E9701EA5-305B-45A5-A125-2EF32F59C62D}.Release|AVR.Build.0 = Release|AVR
+		{FBAA591F-2E15-4F3D-8E09-88105869F5A3}.Debug|AVR.ActiveCfg = Debug|AVR
+		{FBAA591F-2E15-4F3D-8E09-88105869F5A3}.Debug|AVR.Build.0 = Debug|AVR
+		{FBAA591F-2E15-4F3D-8E09-88105869F5A3}.Release|AVR.ActiveCfg = Release|AVR
+		{FBAA591F-2E15-4F3D-8E09-88105869F5A3}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
