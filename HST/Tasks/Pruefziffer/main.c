@@ -10,6 +10,7 @@
 
 // *** INCLUDES ***
 #include <avr/io.h>
+#include "elob_init.h"
 
 // *** DEFINES ***
 
@@ -18,7 +19,9 @@
 
 
 // *** GLOBAL ***
-
+uint8_t readUART();
+int CalcPruefziffer(const int * aArrayP);
+void writeUART(uint8_t zeichen);
 
 /*
  * MAIN-ROUTINE
@@ -27,6 +30,7 @@ int main(void){
 	
 	// *** INITIALIZATION ***
 	
+	elob_init();
 	// ** I/O **
 	
 	// ** Local Variables **
@@ -44,15 +48,18 @@ int main(void){
 		if (tReadIndex > 9)
 		{
 			tReadIndex = 0;
+			tCheckNum = CalcPruefziffer(&tNumFromUART);
+			writeUART(tCheckNum + 48);
 			
-			
+			for (int i = 0; i < 100; ++i)
+			{
+				tNumFromUART[i] = 0;
+			}
 		}
 		else
 		{
 			tCharFromUART = readUART();
-			tNumFromUART = tNumFromUART[tReadIndex - 48];
-			
-			tCheckNum = CalcPruefziffer(&tNumFromUART);
+			tNumFromUART[tReadIndex] = tCharFromUART - 48;
 			
 			// TODO
 			tReadIndex++;
@@ -73,6 +80,12 @@ uint8_t readUART(){
 	while ((UCSR1A & (1<<RXC1)) == 0);
 	return UDR1;
 	
+}
+
+void writeUART(uint8_t zeichen)
+{
+	while ((UCSR1A & (1<<UDRE1)) == 0);	// warten bis Senderegister leer ist
+	UDR1 = zeichen;						// Zeichen senden
 }
 
 int CalcPruefziffer(const int * aArrayP)
@@ -101,10 +114,10 @@ int CalcPruefziffer(const int * aArrayP)
 	tSumOfSums = tSumOddNums + tSumEvenNums;
 	tRemainOfSum = tSumOfSums % 10;
 	
-	if (tRemainOfSum != 0)
+	if (tRemainOfSum > 0)
 	{
-		tSumOfSums - 10;
+		tRemainOfSum = 10 - tRemainOfSum;
 	}
 	
-	return tSumOfSums;
+	return tRemainOfSum;
 }

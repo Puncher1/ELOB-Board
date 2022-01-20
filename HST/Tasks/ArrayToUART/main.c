@@ -131,11 +131,7 @@ void dez_to_ascii(uint16_t num){
 	
 }
 
-void writeUART(uint8_t zeichen)
-{
-	while ((UCSR1A & (1<<UDRE1)) == 0);	// warten bis Senderegister leer ist
-	UDR1 = zeichen;						// Zeichen senden
-}
+
 
 void WaitMilliseconds(int MilliSeconds)
 {
