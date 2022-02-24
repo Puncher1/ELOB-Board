@@ -1,0 +1,34 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>HST4_01</Name>
+    <Description>&lt;No description available&gt;</Description>
+    <ProjectType>CandCPP</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>HST4_01</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.ico</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="HST4_01.cproj" File="HST4_01.cproj" ReplaceParameters="true">
+      <Folder Name="libm" TargetFolderName="libm" />
+      <Folder Name="inc" TargetFolderName="inc">
+        <ProjectItem ReplaceParameters="true" TargetFileName="elob_init.h">elob_init.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="elob_usbUart.h">elob_usbUart.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Error.h">Error.h</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="EventFifo.h">EventFifo.h</ProjectItem>
+      </Folder>
+      <Folder Name="src" TargetFolderName="src">
+        <ProjectItem ReplaceParameters="true" TargetFileName="elob_init.c">elob_init.c</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="elob_usbUart.c">elob_usbUart.c</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="Error.c">Error.c</ProjectItem>
+        <ProjectItem ReplaceParameters="true" TargetFileName="EventFifo.c">EventFifo.c</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="main.c">main.c</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>
